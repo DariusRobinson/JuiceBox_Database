@@ -1,7 +1,6 @@
 {
   "name": "juicebox",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "seed:dev": "nodemon ./db/seed.js"
@@ -14,5 +13,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DariusRobinson/JuiceBox_Database.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DariusRobinson/JuiceBox_Database/issues"
+  },
+  "homepage": "https://github.com/DariusRobinson/JuiceBox_Database#readme",
+  "description": ""
 }
