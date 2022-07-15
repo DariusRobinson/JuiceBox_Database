@@ -14,8 +14,27 @@ async function dropTables() {
     } catch (error) {
         console.error("Error dropping tables!");
         throw error; // we pass the error up to the function that calls dropTables
-    }
+        }
+        }
+        async function testDB() {
+  try {
+    // connect the client to the database, finally
+    client.connect();
+
+    // queries are promises, so we can await them
+    const users = await getAllUsers();
+    // for now, logging is a fine way to see what's up
+    console.log(users);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // it's important to close out the client connection
+    client.end();
+  }
 }
+
+
+
 
 // this function should call a query which creates all tables for our database
 async function createTables() {
