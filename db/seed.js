@@ -123,9 +123,12 @@ async function testDB() {
       name: "Newname Sogood",
       location: "Lesterville, KY",
     });
+    
 
     console.log('')
     console.log("Result:", updateUserResult);
+    // const updatePost = await updatePost()
+    // console.log("Calling updatePost on posts[0]")
 
     console.log("Finished database tests!");
   } catch (error) {

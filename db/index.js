@@ -85,23 +85,35 @@ async function getAllUsers() {
     content,
     active
   }) {
+
+    
      // build the set string
-     const setString = Object.keys(fields).map(
-      (key, index) => `"${ key }"=$${ index + 1 }`
-    ).join(', ');
-  console.log(fields, "Postsfields")  
-    // return early if this is called without fields
-    if (setString.length === 0) {
-      return;
-    }
+  //    const setString = Object.values(title,
+  //     content,
+  //     active).map(
+  //     (key, index) => `"${ key }"=$${ index + 1 }`
+  //   ).join(', ');
+  // // console.log(fields, "Postsfields")  
+  //   // return early if this is called without fields
+  //   console.log(Object.values(title,
+  //     content,
+  //     active, "updatepost fields"))
+  //   if (setString.length === 0) {
+  //     return;
+  //   }
 
 
     try {
-  
+
+      // console.log(`UPDATE posts
+      //   SET ${setString}
+      //   WHERE "authourId" = ${id}
+      //   RETURNING *;` ,'this is post update')
+
       const  {rows: posts}  = await client.query(`
         UPDATE posts
         SET ${setString}
-        WHERE "authourId" = ${id}
+        WHERE id = ${id}
         RETURNING *;
       `, Object.values(fields),);
   
@@ -110,6 +122,41 @@ async function getAllUsers() {
       throw error;
     }
   }
+
+
+  // async function updateUser(id, fields = {}) {
+  //   // build the set string
+  //   const setString = Object.keys(fields).map(
+  //     (key, index) => `"${ key }"=$${ index + 1 }`
+  //   ).join(', ');
+  // // console.log(fields, "fields")
+  // // console.log(Object.values(fields))
+  //   // return early if this is called without fields
+  //   if (setString.length === 0) {
+  //     return;
+  //   }
+  
+  //   try {
+  //     console.log(`
+  //     UPDATE users
+  //     SET ${setString}
+  //     WHERE id = ${id}
+  //     RETURNING *;
+  //   `)
+  //     const  {rows: user}  = await client.query(`
+  //       UPDATE users
+  //       SET ${setString}
+  //       WHERE id = ${id}
+  //       RETURNING *;
+  //     `, Object.values(fields),);
+  
+  //     return user;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
+
+
 
 
 
