@@ -127,9 +127,7 @@ async function testDB() {
 
     console.log('')
     console.log("Result:", updateUserResult);
-    // const updatePost = await updatePost()
-    // console.log("Calling updatePost on posts[0]")
-
+   
     console.log("Finished database tests!");
   } catch (error) {
     console.error("Error testing database!");
