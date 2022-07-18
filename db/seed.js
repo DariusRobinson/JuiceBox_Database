@@ -1,12 +1,13 @@
 // grab our client with destructuring from the export in index.js
-const { client, getAllUsers, createUser, updateUser } = require("./index");
+const { client, getAllUsers, createUser, updateUser, createPost, updatePost, getAllPosts, getPostsByUser} = require("./index");
 
 async function dropTables() {
   try {
     console.log("Starting to drop tables...");
 
     await client.query(`
-        DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS posts;
+    DROP TABLE IF EXISTS users;
         `);
 
     console.log("Finished dropping tables!");
@@ -122,6 +123,8 @@ async function testDB() {
       name: "Newname Sogood",
       location: "Lesterville, KY",
     });
+
+    console.log('')
     console.log("Result:", updateUserResult);
 
     console.log("Finished database tests!");
