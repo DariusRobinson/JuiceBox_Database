@@ -164,12 +164,13 @@ async function updatePost(id, fields = {}) {
 }
 
 async function getAllPosts() {
+  console.log( "getting AllPosts beginning, function")
   try {
     const { rows } = await client.query(`
       SELECT *
       FROM posts;
     `);
-
+    console.log( "getting AllPosts finishing, function")
     return rows;
   } catch (error) {
     throw error;
@@ -193,7 +194,7 @@ async function createTags(tagList) {
   if (tagList.length === 0) { 
     return; 
   }
-
+ console.log ("beginning create tags function")
   // need something like: $1), ($2), ($3 
   const insertValues = tagList.map(
     (_, index) => `$${index + 1}`).join('), (');
@@ -204,20 +205,20 @@ async function createTags(tagList) {
     (_, index) => `$${index + 1}`).join(', ');
 
   
-console.log(insertValues, "insertValues")
+
   try {
      await client.query(`
     INSERT INTO tags(name)
-    VALUES ${insertValues} 
+    VALUES (${insertValues})
     ON CONFLICT (name) DO NOTHING;
-    `);
+    `, tagList);
     const { rows } = await client.query(`
     SELECT * 
     FROM tags
     WHERE name
-    IN ${selectValues}; `, tagList
+    IN (${selectValues}); `, tagList
 );
-console.log(selectValues, "selectedValues")
+console.log("finishing running create tags function")
    return    rows;
     // insert the tags, doing nothing on conflict
     // returning nothing, we'll query after
@@ -229,6 +230,7 @@ console.log(selectValues, "selectedValues")
   }
 }
 async function createPostTag(postId, tagId) {
+  
   try {
     await client.query(`
       INSERT INTO post_tags("postId", "tagId")
@@ -238,15 +240,17 @@ async function createPostTag(postId, tagId) {
   } catch (error) {
     throw error;
   }
+  
 }
 async function addTagsToPost(postId, tagList) {
+  console.log( "add Tag starting, function")
   try {
     const createPostTagPromises = tagList.map(
       tag => createPostTag(postId, tag.id)
     );
 
     await Promise.all(createPostTagPromises);
-
+    console.log( "add Tag finishing, function")
     return await getPostById(postId);
   } catch (error) {
     throw error;
