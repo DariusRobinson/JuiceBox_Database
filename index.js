@@ -6,13 +6,13 @@ const morgan = require("morgan");
 const server = express();
 const { client } = require("./db");
 const apiRouter = require("./api");
+client.connect();
 
 //SERVER.USE
 server.use(morgan("dev"));
 
 server.use(express.json());
 
-client.connect();
 
 server.listen(PORT, () => {
   console.log("The server is up on port", PORT);
