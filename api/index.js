@@ -3,7 +3,7 @@ const apiRouter = express.Router();
 const postsRouter = require('./posts')
 const usersRouter = require('./users');
 const tagsRouter = require('./tags');
-
+// testing an error 
 
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
