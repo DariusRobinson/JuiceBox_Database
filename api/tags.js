@@ -14,15 +14,15 @@ tagsRouter.use((req, res, next) => {
   tagsRouter.get('/:tagName/posts', async (req, res, next) => {
     const {tagName} = req.params;
     // read the tagname from the params
+    
     try {
-    let newTagName = decodeURIComponent(tagName)
-      
-        const postsByTags = await getPostsByTagName(newTagName);
+    
+      // let newTagName = decodeURIComponent(tagName)
+        const postsByTags = await getPostsByTagName(tagName);
         console.log (postsByTags, "this is post by tag")
 
-        console.log(newTagName, "newtagname")
-        // tagNamePosts.posts = posts
-
+         console.log(tagName, "newtagname")
+        //  tagNamePosts.posts = posts
         res.send({postsByTags: postsByTags})
       // use our method to get posts by tag name from the db
       // send out an object to the client { posts: // the posts }
@@ -32,7 +32,6 @@ tagsRouter.use((req, res, next) => {
     }
   });
 
-  
   tagsRouter.get('/', async (req, res) => {
       const tags = await getAllTags();
     
