@@ -1,6 +1,7 @@
 {
   "name": "juicebox",
   "version": "1.0.0",
+  
   "main": "index.js",
   "scripts": {
     "seed:dev": "nodemon ./db/seed.js",
